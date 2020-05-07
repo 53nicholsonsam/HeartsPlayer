@@ -8,7 +8,7 @@ NUMBERS = list(range(1,14))
 deck=[]
 for item in SUITS:
   for num in NUMBERS:
-    deck.append(str(num)+item) # Creating the cards here
+    deck.append(str(num).zfill(2)+item) # Creating the cards here
 
 indexDeck = list(range(1,53)) # Need to index the deck so that we can deal it
 tempToDict=[] 
