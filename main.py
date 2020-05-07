@@ -42,7 +42,14 @@ for ii in range(0,len(Player1deal)):  #This is the actual dealing
   player4hand.append(deckWithIndex[Player4deal[ii]])
 
 #Players now each have a hand of 13 cards
-
+###Sorting the hands
+def takesecond(elem):
+  return elem[2]
+player1hand.sort(key= takesecond)
+player2hand.sort(key=takesecond)
+player3hand.sort(key=takesecond)
+player4hand.sort(key=takesecond)
+#print(player1hand)
 print("Welcome to the Hearts simulator! Enter 'exit' to leave at any time")
 # program while loop to play Hearts, type "exit" to exit
 while True:
@@ -52,6 +59,5 @@ while True:
     userInput = input('Which card would you like to play? ')
     if userInput == "exit":
         break
-
-
+    
 
