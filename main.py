@@ -179,18 +179,63 @@ player3tricks=[]
 player4tricks=[]
 played=[]
 playersplayed=[]
+lead=[]
 ##First Trick##
-for hand in handssorted:
+for hand in handssorted: #check who has the 2 of clubs
   for card in hand:
     if card == "01c":
       played.append(card)
-      hand.pop(hand.index(card))
-      playersplayed.append(handssorted.index(hand))
-for hand in clubssorted:
+      #hand.pop(hand.index(card))
+      playersplayed.append(handssorted.index(hand)) #tracking who has played
+for hand in clubssorted: #the rest of the people play their highest club
   if clubssorted.index(hand) != playersplayed[0]:
     played.append(hand[len(hand)-1])
-    hand.pop(len(hand)-1)
-print(played) #to this point, I can get the right cards to be played, but I am having trouble figuring out how to figure out who gets the trick.
+    #hand.pop(len(hand)-1)
+played.sort() #then we figure out who played each card to assign the tricks and remove the cards from their hands
+for hand in handssorted:
+  for card in hand:
+    if card == played[3]: #assigning tricks
+      if handssorted.index(hand)==0:
+        player1tricks.append(played)
+        lead.append(handssorted.index(hand)+1)
+      elif handssorted.index(hand)==1:
+        player2tricks.append(played)
+        lead.append(handssorted.index(hand)+1)
+      elif handssorted.index(hand)==2:
+        player3tricks.append(played)
+        lead.append(handssorted.index(hand)+1)
+      elif handssorted.index(hand)==3:
+        player4tricks.append(played)
+        lead.append(handssorted.index(hand)+1)
+    if card == played[0]: #removing played cards from their hands
+      hand.pop(hand.index(played[0]))
+    elif card== played[1]:
+      hand.pop(hand.index(played[1]))
+    elif card==played[2]:
+      hand.pop(hand.index(played[2]))
+    elif card==played[3]:
+      hand.pop(hand.index(played[3]))
+for hand in clubssorted: #removing played cards from the list of clubs
+  for card in hand:
+    if card == played[0]:
+      hand.pop(hand.index(played[0]))
+    elif card== played[1]:
+      hand.pop(hand.index(played[1]))
+    elif card==played[2]:
+      hand.pop(hand.index(played[2]))
+    elif card==played[3]:
+      hand.pop(hand.index(played[3]))
+played=[] #reset the played tracker
+#check our results
+print(player1tricks)
+print(player2tricks)
+print(player3tricks)
+print(player4tricks)
+for hand in handssorted:
+  print(hand)
+print(lead)
+##Subsequent tricks##
+#print(played) 
 
 
 
