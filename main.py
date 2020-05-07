@@ -163,10 +163,40 @@ for item in player4diamonds:
   player4handsorted.append(item)
 for item in player4hearts:
   player4handsorted.append(item)
+handssorted=[player1handsorted,player2handsorted,player3handsorted,player4handsorted] #putting all the hands together to itterate through below
+clubssorted=[player1clubs,player2clubs,player3clubs,player4clubs]
+spadessorted=[player1spades,player2spades,player3spades,player4spades]
+heartssorted=[player1hearts,player2hearts,player3hearts,player4hearts]
+diamondssorted=[player1diamonds,player2diamonds,player3diamonds,player4diamonds]
 print(player1handsorted)
 print(player2handsorted)
 print(player3handsorted)
 print(player4handsorted)
+###Playing the hand###
+player1tricks=[]
+player2tricks=[]
+player3tricks=[]
+player4tricks=[]
+played=[]
+playersplayed=[]
+##First Trick##
+for hand in handssorted:
+  for card in hand:
+    if card == "01c":
+      played.append(card)
+      hand.pop(hand.index(card))
+      playersplayed.append(handssorted.index(hand))
+for hand in clubssorted:
+  if clubssorted.index(hand) != playersplayed[0]:
+    played.append(hand[len(hand)-1])
+    hand.pop(len(hand)-1)
+print(played)
+
+
+
+
+
+
 
 #print(player1hand)
 print("Welcome to the Hearts simulator! Enter 'exit' to leave at any time")
