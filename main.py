@@ -43,21 +43,53 @@ for ii in range(0,len(Player1deal)):  #This is the actual dealing
 
 #Players now each have a hand of 13 cards
 ###Sorting the hands
-def takesecond(elem):
-  return elem[2]
-player1hand.sort(key= takesecond)
-player2hand.sort(key=takesecond)
-player3hand.sort(key=takesecond)
-player4hand.sort(key=takesecond)
+#def takesecond(elem):
+#  return elem[2]
+#player1hand.sort(key= takesecond)
+#player2hand.sort(key=takesecond)
+#player3hand.sort(key=takesecond)
+#player4hand.sort(key=takesecond)
+player1handsorted=[]
+player1clubs=[]
+player1spades=[]
+player1hearts=[]
+player1diamonds=[]
+for item in player1hand:
+  while item[2] == "c":
+    player1clubs.append(item)
+    break
+  while item[2] == "s":
+    player1spades.append(item)
+    break
+  while item[2] == "h":
+    player1hearts.append(item)
+    break
+  while item[2] == "d":
+    player1diamonds.append(item)
+    break
+player1clubs.sort()
+player1spades.sort()
+player1hearts.sort()
+player1diamonds.sort()
+for item in player1clubs:
+  player1handsorted.append(item)
+for item in player1spades:
+  player1handsorted.append(item)
+for item in player1diamonds:
+  player1handsorted.append(item)
+for item in player1hearts:
+  player1handsorted.append(item)
+print(player1handsorted)
+
 #print(player1hand)
 print("Welcome to the Hearts simulator! Enter 'exit' to leave at any time")
 # program while loop to play Hearts, type "exit" to exit
-while True:
-    print("Here is your hand: ")
-    print(player1hand)
-    print("Here is what was dealt: <insert card that was dealt>")
-    userInput = input('Which card would you like to play? ')
-    if userInput == "exit":
-        break
+#while True:
+#    print("Here is your hand: ")
+#    print(player1hand)
+#    print("Here is what was dealt: <insert card that was dealt>")
+#    userInput = input('Which card would you like to play? ')
+#    if userInput == "exit":
+#        break
     
 
