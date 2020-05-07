@@ -190,7 +190,7 @@ for hand in clubssorted:
   if clubssorted.index(hand) != playersplayed[0]:
     played.append(hand[len(hand)-1])
     hand.pop(len(hand)-1)
-print(played)
+print(played) #to this point, I can get the right cards to be played, but I am having trouble figuring out how to figure out who gets the trick.
 
 
 
