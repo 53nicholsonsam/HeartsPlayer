@@ -43,19 +43,13 @@ for ii in range(0,len(Player1deal)):  #This is the actual dealing
 
 #Players now each have a hand of 13 cards
 ###Sorting the hands
-#def takesecond(elem):
-#  return elem[2]
-#player1hand.sort(key= takesecond)
-#player2hand.sort(key=takesecond)
-#player3hand.sort(key=takesecond)
-#player4hand.sort(key=takesecond)
-player1handsorted=[]
-player1clubs=[]
+player1handsorted=[] #where the sorted hands will ultimately go
+player1clubs=[] #getting ready to separate out the cards by suit
 player1spades=[]
 player1hearts=[]
 player1diamonds=[]
-for item in player1hand:
-  while item[2] == "c":
+for item in player1hand: #going through the hand
+  while item[2] == "c": #separating by suit
     player1clubs.append(item)
     break
   while item[2] == "s":
@@ -67,11 +61,11 @@ for item in player1hand:
   while item[2] == "d":
     player1diamonds.append(item)
     break
-player1clubs.sort()
+player1clubs.sort() #sort each suit
 player1spades.sort()
 player1hearts.sort()
 player1diamonds.sort()
-for item in player1clubs:
+for item in player1clubs: #put the sorted suits back into the sorted hand
   player1handsorted.append(item)
 for item in player1spades:
   player1handsorted.append(item)
@@ -79,7 +73,100 @@ for item in player1diamonds:
   player1handsorted.append(item)
 for item in player1hearts:
   player1handsorted.append(item)
+player2handsorted=[] #repeat procedure for the other players.
+player2clubs=[]
+player2spades=[]
+player2hearts=[]
+player2diamonds=[]
+for item in player2hand:
+  while item[2] == "c":
+    player2clubs.append(item)
+    break
+  while item[2] == "s":
+    player2spades.append(item)
+    break
+  while item[2] == "h":
+    player2hearts.append(item)
+    break
+  while item[2] == "d":
+    player2diamonds.append(item)
+    break
+player2clubs.sort()
+player2spades.sort()
+player2hearts.sort()
+player2diamonds.sort()
+for item in player2clubs:
+  player2handsorted.append(item)
+for item in player2spades:
+  player2handsorted.append(item)
+for item in player2diamonds:
+  player2handsorted.append(item)
+for item in player2hearts:
+  player2handsorted.append(item)
+player3handsorted=[]
+player3clubs=[]
+player3spades=[]
+player3hearts=[]
+player3diamonds=[]
+for item in player3hand:
+  while item[2] == "c":
+    player3clubs.append(item)
+    break
+  while item[2] == "s":
+    player3spades.append(item)
+    break
+  while item[2] == "h":
+    player3hearts.append(item)
+    break
+  while item[2] == "d":
+    player3diamonds.append(item)
+    break
+player3clubs.sort()
+player3spades.sort()
+player3hearts.sort()
+player3diamonds.sort()
+for item in player3clubs:
+  player3handsorted.append(item)
+for item in player3spades:
+  player3handsorted.append(item)
+for item in player3diamonds:
+  player3handsorted.append(item)
+for item in player3hearts:
+  player3handsorted.append(item)
+player4handsorted=[]
+player4clubs=[]
+player4spades=[]
+player4hearts=[]
+player4diamonds=[]
+for item in player4hand:
+  while item[2] == "c":
+    player4clubs.append(item)
+    break
+  while item[2] == "s":
+    player4spades.append(item)
+    break
+  while item[2] == "h":
+    player4hearts.append(item)
+    break
+  while item[2] == "d":
+    player4diamonds.append(item)
+    break
+player4clubs.sort()
+player4spades.sort()
+player4hearts.sort()
+player4diamonds.sort()
+for item in player4clubs:
+  player4handsorted.append(item)
+for item in player4spades:
+  player4handsorted.append(item)
+for item in player4diamonds:
+  player4handsorted.append(item)
+for item in player4hearts:
+  player4handsorted.append(item)
 print(player1handsorted)
+print(player2handsorted)
+print(player3handsorted)
+print(player4handsorted)
 
 #print(player1hand)
 print("Welcome to the Hearts simulator! Enter 'exit' to leave at any time")
