@@ -9,14 +9,8 @@ def determineCard(cardLed, hand):
         if card[2] == suit:
             cardsOfSuit.append(card)
     if len(cardsOfSuit) == 0:
-        print(cardLed)
-        print(hand)
-        print(hand[0])
         return hand[0]
     else:
-        print(cardLed)
-        print(hand)
-        print(cardsOfSuit[0])
         return cardsOfSuit[0]
     
 

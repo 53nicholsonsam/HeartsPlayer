@@ -249,6 +249,37 @@ while len(playedCards) < 52:
 
   currentTrick = []
 
+player1points = 0
+player2points = 0
+player3points = 0
+player4points = 0
+
+for card in player1tricks:
+  if card[2] == "h":
+    player1points += 1
+  if card == "11s":
+    player1points += 13
+for card in player2tricks:
+  if card[2] == "h":
+    player2points += 1
+  if card == "11s":
+    player2points += 13
+for card in player3tricks:
+  if card[2] == "h":
+    player3points += 1
+  if card == "11s":
+    player3points += 13
+for card in player4tricks:
+  if card[2] == "h":
+    player4points += 1
+  if card == "11s":
+    player4points += 13
+
+print(player1points)
+print(player2points)
+print(player3points)
+print(player4points)
+
 # print(player1tricks)
 # print(player2tricks)
 # print(player3tricks)
