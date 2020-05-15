@@ -204,3 +204,19 @@ def determineLead(playedCards, hand):
         else:
             return "0" + str(highestS) + "s"
 
+def determineValidity(cardLed, card, hand):
+    """
+    Determine if the card the player tried to play is valid.
+    """
+    if cardLed == "01c" and (card[2] == "h" or card == "11s"):
+        print("Cannot play Queen of spades or a heart on the first trick.")
+        return False
+    if card[2] == cardLed[2]:
+        return True
+    else: 
+        for c in hand:
+            if c[2] == cardLed[2]:
+                print("If you have a card of the suit led, you must play it.")
+                return False
+        return True
+    
