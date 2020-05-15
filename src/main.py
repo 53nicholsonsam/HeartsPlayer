@@ -2,6 +2,8 @@
 import random
 from determineCard import determineCard, determineLead
 
+# print("Welcome to the Hearts simulator! Enter 'exit' to leave at any time")
+
 player1points = 0
 player2points = 0
 player3points = 0
@@ -283,26 +285,5 @@ while player1points < 100 and player2points < 100 and player3points < 100 and pl
   print(player2points)
   print(player3points)
   print(player4points)
-
-# print(player1tricks)
-# print(player2tricks)
-# print(player3tricks)
-# print(player4tricks)
-
-# print(len(player1tricks))
-# print(len(player2tricks))
-# print(len(player3tricks))
-# print(len(player4tricks))
-
-#print(player1hand)
-# print("Welcome to the Hearts simulator! Enter 'exit' to leave at any time")
-# program while loop to play Hearts, type "exit" to exit
-#while True:
-#    print("Here is your hand: ")
-#    print(player1hand)
-#    print("Here is what was dealt: <insert card that was dealt>")
-#    userInput = input('Which card would you like to play? ')
-#    if userInput == "exit":
-#        break
     
 
