@@ -1,6 +1,6 @@
 ### Creating a script that plays hearts with itself with the hopes of further expansion
 import random
-from determineCard import determineCard, determineLead, determineValidity
+from determineCard import determineCard, determineLead, determineValidity, determineLeadValidity
 
 print("Welcome to the Hearts simulator! Enter 'exit' to leave at any time")
 
@@ -184,7 +184,12 @@ while player1points < 100 and player2points < 100 and player3points < 100 and pl
 
   while len(playedCards) < 52:
     if lead == 1:
-      leadCard = determineLead(playedCards, player1hand)
+      print("You have the lead! Here is your hand: ")
+      print(player1hand)
+      valid = False
+      while valid == False:
+        card1 = input("Which card would you like to lead? Enter it like this: '04c' for 5 of clubs, '10d' for Jack of diamonds: ")
+        valid = determineLeadValidity(playedCards, card1, player1hand)
       card2 = determineCard(playedCards, currentTrick, leadCard, player2hand)
       card3 = determineCard(playedCards, currentTrick, leadCard, player3hand)
       card4 = determineCard(playedCards, currentTrick, leadCard, player4hand)
@@ -202,16 +207,23 @@ while player1points < 100 and player2points < 100 and player3points < 100 and pl
       player4hand.remove(card4)
     elif lead == 2:
       leadCard = determineLead(playedCards, player2hand)
-      card3 = determineCard(playedCards, currentTrick, leadCard, player3hand)
-      card4 = determineCard(playedCards, currentTrick, leadCard, player4hand)
-      card1 = determineCard(playedCards, currentTrick, leadCard, player1hand)
       currentTrick.append([leadCard, 2])
-      currentTrick.append([card3, 3])
-      currentTrick.append([card4, 4])
-      currentTrick.append([card1, 1])
       playedCards.append(leadCard)
+      card3 = determineCard(playedCards, currentTrick, leadCard, player3hand)
+      currentTrick.append([card3, 3])
       playedCards.append(card3)
+      card4 = determineCard(playedCards, currentTrick, leadCard, player4hand)
+      currentTrick.append([card4, 4])
       playedCards.append(card4)
+      print("Here are the cards that have been played so far this trick: ")
+      print(currentTrick)
+      print("Here is your hand: ")
+      print(player1hand)
+      valid = False
+      while valid == False:
+        card1 = input("Which card would you like to play? Enter it like this: '04c' for 5 of clubs, '10d' for Jack of diamonds: ")
+        valid = determineValidity("01c", card1, player1hand)
+      currentTrick.append([card1, 1])
       playedCards.append(card1)
       player2hand.remove(leadCard)
       player3hand.remove(card3)
@@ -219,16 +231,23 @@ while player1points < 100 and player2points < 100 and player3points < 100 and pl
       player1hand.remove(card1)
     elif lead == 3:
       leadCard = determineLead(playedCards, player3hand)
-      card4 = determineCard(playedCards, currentTrick, leadCard, player4hand)
-      card1 = determineCard(playedCards, currentTrick, leadCard, player1hand)
-      card2 = determineCard(playedCards, currentTrick, leadCard, player2hand)
       currentTrick.append([leadCard, 3])
-      currentTrick.append([card4, 4])
-      currentTrick.append([card1, 1])
-      currentTrick.append([card2, 2])
       playedCards.append(leadCard)
+      card4 = determineCard(playedCards, currentTrick, leadCard, player4hand)
+      currentTrick.append([card4, 4])
       playedCards.append(card4)
+      print("Here are the cards that have been played so far this trick: ")
+      print(currentTrick)
+      print("Here is your hand: ")
+      print(player1hand)
+      valid = False
+      while valid == False:
+        card1 = input("Which card would you like to play? Enter it like this: '04c' for 5 of clubs, '10d' for Jack of diamonds: ")
+        valid = determineValidity("01c", card1, player1hand)
+      currentTrick.append([card1, 1])
       playedCards.append(card1)
+      card2 = determineCard(playedCards, currentTrick, leadCard, player2hand)
+      currentTrick.append([card2, 2])
       playedCards.append(card2)
       player3hand.remove(leadCard)
       player4hand.remove(card4)
@@ -236,16 +255,23 @@ while player1points < 100 and player2points < 100 and player3points < 100 and pl
       player2hand.remove(card2)
     else:
       leadCard = determineLead(playedCards, player4hand)
-      card1 = determineCard(playedCards, currentTrick, leadCard, player1hand)
-      card2 = determineCard(playedCards, currentTrick, leadCard, player2hand)
-      card3 = determineCard(playedCards, currentTrick, leadCard, player3hand)
       currentTrick.append([leadCard, 4])
-      currentTrick.append([card1, 1])
-      currentTrick.append([card2, 2])
-      currentTrick.append([card3, 3])
       playedCards.append(leadCard)
+      print("Here are the cards that have been played so far this trick: ")
+      print(currentTrick)
+      print("Here is your hand: ")
+      print(player1hand)
+      valid = False
+      while valid == False:
+        card1 = input("Which card would you like to play? Enter it like this: '04c' for 5 of clubs, '10d' for Jack of diamonds: ")
+        valid = determineValidity("01c", card1, player1hand)
+      currentTrick.append([card1, 1])
       playedCards.append(card1)
+      card2 = determineCard(playedCards, currentTrick, leadCard, player2hand)
+      currentTrick.append([card2, 2])
       playedCards.append(card2)
+      card3 = determineCard(playedCards, currentTrick, leadCard, player3hand)
+      currentTrick.append([card3, 3])
       playedCards.append(card3)
       player4hand.remove(leadCard)
       player1hand.remove(card1)

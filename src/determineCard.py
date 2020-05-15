@@ -220,3 +220,18 @@ def determineValidity(cardLed, card, hand):
                 return False
         return True
     
+def determineLeadValidity(playedCards, card, hand):
+    # always okay to lead a non-Heart
+    if card[2] != "h":
+        return True
+    # otherwise, it must have either been broken, or the player has all hearts left
+    else:
+        for c in playedCards:
+            if c[2] == "h":
+                return True
+        for c in hand:
+            if c[2] != "h":
+                print("Hearts have not yet been broken. Please lead a non-Heart.")
+                return False
+        return True
+                
