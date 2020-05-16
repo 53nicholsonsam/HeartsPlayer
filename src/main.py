@@ -53,6 +53,35 @@ while player1points < 100 and player2points < 100 and player3points < 100 and pl
     player3hand.append(deckWithIndex[Player3deal[ii]])
     player4hand.append(deckWithIndex[Player4deal[ii]])
 
+  # sort player1's hand
+  hearts = []
+  spades = []
+  diamonds = []
+  clubs = []
+  for card in player1hand:
+    if card[2] == "h":
+      hearts.append(card)
+    elif card[2] == "s":
+      spades.append(card)
+    elif card[2] == "d":
+      diamonds.append(card)
+    else:
+      clubs.append(card)
+  hearts.sort()
+  spades.sort()
+  diamonds.sort()
+  clubs.sort()
+  sortedHand = []
+  for card in hearts:
+    sortedHand.append(card)
+  for card in spades:
+    sortedHand.append(card)
+  for card in diamonds:
+    sortedHand.append(card)
+  for card in clubs:
+    sortedHand.append(card)
+  player1hand = sortedHand
+
   # cards that each player has won
   player1tricks=[]
   player2tricks=[]
@@ -167,6 +196,10 @@ while player1points < 100 and player2points < 100 and player3points < 100 and pl
         highest = int((c[0] + c[1]))
         lead = p
 
+  print("Cards played: ")
+  print(currentTrick)
+  print("Player " + str(lead) + " won the trick.")
+
   if lead == 1:
     for card in currentTrick:
       player1tricks.append(card[0])
@@ -188,8 +221,8 @@ while player1points < 100 and player2points < 100 and player3points < 100 and pl
       print(player1hand)
       valid = False
       while valid == False:
-        card1 = input("Which card would you like to lead? Enter it like this: '04c' for 5 of clubs, '10d' for Jack of diamonds: ")
-        valid = determineLeadValidity(playedCards, card1, player1hand)
+        leadCard = input("Which card would you like to lead? Enter it like this: '04c' for 5 of clubs, '10d' for Jack of diamonds: ")
+        valid = determineLeadValidity(playedCards, leadCard, player1hand)
       card2 = determineCard(playedCards, currentTrick, leadCard, player2hand)
       card3 = determineCard(playedCards, currentTrick, leadCard, player3hand)
       card4 = determineCard(playedCards, currentTrick, leadCard, player4hand)
@@ -222,7 +255,7 @@ while player1points < 100 and player2points < 100 and player3points < 100 and pl
       valid = False
       while valid == False:
         card1 = input("Which card would you like to play? Enter it like this: '04c' for 5 of clubs, '10d' for Jack of diamonds: ")
-        valid = determineValidity("01c", card1, player1hand)
+        valid = determineValidity(leadCard, card1, player1hand)
       currentTrick.append([card1, 1])
       playedCards.append(card1)
       player2hand.remove(leadCard)
@@ -243,7 +276,7 @@ while player1points < 100 and player2points < 100 and player3points < 100 and pl
       valid = False
       while valid == False:
         card1 = input("Which card would you like to play? Enter it like this: '04c' for 5 of clubs, '10d' for Jack of diamonds: ")
-        valid = determineValidity("01c", card1, player1hand)
+        valid = determineValidity(leadCard, card1, player1hand)
       currentTrick.append([card1, 1])
       playedCards.append(card1)
       card2 = determineCard(playedCards, currentTrick, leadCard, player2hand)
@@ -264,7 +297,7 @@ while player1points < 100 and player2points < 100 and player3points < 100 and pl
       valid = False
       while valid == False:
         card1 = input("Which card would you like to play? Enter it like this: '04c' for 5 of clubs, '10d' for Jack of diamonds: ")
-        valid = determineValidity("01c", card1, player1hand)
+        valid = determineValidity(leadCard, card1, player1hand)
       currentTrick.append([card1, 1])
       playedCards.append(card1)
       card2 = determineCard(playedCards, currentTrick, leadCard, player2hand)
@@ -280,6 +313,7 @@ while player1points < 100 and player2points < 100 and player3points < 100 and pl
 
     suit = leadCard[2]
     highest = int((leadCard[0] + leadCard[1]))
+    points = 0
     for card in currentTrick:
       c = card[0]
       p = card[1]
@@ -287,19 +321,27 @@ while player1points < 100 and player2points < 100 and player3points < 100 and pl
         if int((c[0] + c[1])) > highest:
           lead = p
           highest = int((c[0] + c[1]))
+      if c == "11s":
+        points += 13
+      if c[2] == "h":
+        points += 1
     
     if lead == 1:
       for card in currentTrick:
         player1tricks.append(card[0])
+      print("You won the trick! " + str(points) + " points added. " )
     elif lead == 2:
       for card in currentTrick:
         player2tricks.append(card[0])
+      print("Player 2 won the trick! " + str(points) + " points added. " )
     elif lead == 3:
       for card in currentTrick:
         player3tricks.append(card[0])
+      print("Player 3 won the trick! " + str(points) + " points added. " )
     else:
       for card in currentTrick:
         player4tricks.append(card[0])
+      print("Player 4 won the trick! " + str(points) + " points added. " )
 
     currentTrick = []
 
