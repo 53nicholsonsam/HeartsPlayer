@@ -107,6 +107,9 @@ while player1points < 100 and player2points < 100 and player3points < 100 and pl
   num = 0
   imageList = []
 
+  label = Label(root, text = "Welcome to the Hearts simulator!")
+  label.grid(row = 0, columnspan=3, sticky='W')
+
   for card in player1hand:
     path = mapCardToImagePath(card)
     imageList.append(ImageTk.PhotoImage(Image.open(path).resize((80, 120))))
@@ -114,7 +117,7 @@ while player1points < 100 and player2points < 100 and player3points < 100 and pl
   for img in imageList:
     btn = Button(root, image = img, command = partial(on_click, player1hand[num]))
     btn.image = img
-    btn.grid(row = 0, column = num)
+    btn.grid(row = 1, column = num)
 
     num += 1
 
