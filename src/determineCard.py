@@ -23,38 +23,46 @@ def determineCard(playedCards, currentTrick, cardLed, hand):
     # player has no cards of the suit that was led
     if len(cardsOfSuit) == 0:
         # dump the queen if you have it!
-        if hasQueen:
+        if hasQueen and cardLed != "01c":
             return "11s"
         # otherwise play highest heart in hand
-        elif hasHearts:
+        if hasHearts and cardLed != "01c":
             if maxHeart < 10:
                 return "0" + str(maxHeart) + "h"
             else:
                 return str(maxHeart) + "h"
         # if no hearts or queen, play highest remaining card
+        maxCard = 0
+        suit = ""
+        for card in hand:
+            if int((card[0] + card[1])) > maxCard:
+                maxCard = int((card[0] + card[1]))
+                suit = card[2]
+        if maxCard < 10:
+            return "0" + str(maxCard) + suit
         else:
-            maxCard = 0
-            suit = ""
-            for card in hand:
-                if int((card[0] + card[1])) > maxCard:
-                    maxCard = int((card[0] + card[1]))
-                    suit = card[2]
-            if maxCard < 10:
-                return "0" + str(maxCard) + suit
-            else:
-                return str(maxCard) + suit
+            return str(maxCard) + suit
     else:
+        # special case of spades led and someone else played ace or king
+        if ("12s" in currentTrick or "13s" in currentTrick) and cardLed[2] == "s" and "11s" in hand:
+            return "11s"
         wantToWin = True # should player try to win the trick or no?
         # if hearts or the queen have been played, don't try to win
         for card in currentTrick:
             if card[0] == "11s" or card[0][2] == "h":
                 wantToWin = False
+        # if queen is still out there, do not want to win in spades!
+        if "11c" not in playedCards and cardLed[2] == "s":
+            wantToWin = False
+        # if you have the queen in spades, don't try to win!
+        if "11c" in hand:
+            wantToWin = False
         playedOfSuit = 0
         for card in playedCards:
             if card[2] == suit:
                 playedOfSuit += 1
         # if someone didn't have the suit previously, or a lot have been played, don't want to win
-        if (playedOfSuit % 4) != 0 or playedOfSuit > 7:
+        if ((playedOfSuit % 4) != 0 and playedOfSuit > 4) or playedOfSuit > 7:
             wantToWin = False
     
         # find max and min cards of suit
@@ -86,7 +94,7 @@ def determineLead(playedCards, hand):
     """
     # have hearts been broken?
     broken = False
-    # number of played cards from each suit so far
+    # played cards from each suit so far
     playedH = []
     playedS = []
     playedC = []
@@ -204,3 +212,50 @@ def determineLead(playedCards, hand):
         else:
             return "0" + str(highestS) + "s"
 
+def determineValidity(cardLed, card, hand):
+    """
+    Determine if the card the player tried to play is valid.
+    """
+    # ensure card is actually in hand
+    inHand = False
+    for c in hand:
+        if card == c:
+            inHand = True
+    if inHand == False:
+        print("Card selected must be in hand. Please try again.")
+        return False
+    if cardLed == "01c" and (card[2] == "h" or card == "11s"):
+        print("Cannot play Queen of spades or a heart on the first trick.")
+        return False
+    if card[2] == cardLed[2]:
+        return True
+    else: 
+        for c in hand:
+            if c[2] == cardLed[2]:
+                print("If you have a card of the suit led, you must play it.")
+                return False
+        return True
+    
+def determineLeadValidity(playedCards, card, hand):
+    # ensure card is actually in hand
+    inHand = False
+    for c in hand:
+        if card == c:
+            inHand = True
+    if inHand == False:
+        print("Card selected must be in hand. Please try again.")
+        return False
+    # always okay to lead a non-Heart
+    if card[2] != "h":
+        return True
+    # otherwise, it must have either been broken, or the player has all hearts left
+    else:
+        for c in playedCards:
+            if c[2] == "h":
+                return True
+        for c in hand:
+            if c[2] != "h":
+                print("Hearts have not yet been broken. Please lead a non-Heart.")
+                return False
+        return True
+                
