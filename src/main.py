@@ -1,8 +1,10 @@
 ### Creating a script that plays hearts with itself with the hopes of further expansion
 import random
-from determineCard import determineCard, determineLead, determineValidity, determineLeadValidity
-
-print("Welcome to the Hearts simulator! Enter 'exit' to leave at any time")
+from determineCard import determineCard, determineLead, determineValidity, determineLeadValidity, mapCardToImagePath
+import tkinter as tk
+from tkinter.ttk import *
+from PIL import Image, ImageTk
+from functools import partial
 
 # user is player 1
 player1points = 0
@@ -10,6 +12,11 @@ player2points = 0
 player3points = 0
 player4points = 0
 handCount = 0
+
+
+def on_click(card):
+    print("clicked card: " + str(card))
+
 
 while player1points < 100 and player2points < 100 and player3points < 100 and player4points < 100:
   handCount += 1
@@ -92,6 +99,27 @@ while player1points < 100 and player2points < 100 and player3points < 100 and pl
   playedCards = []
 
   currentTrick = []
+
+  # ********EXPERIMENTAL******** #
+  root = tk.Tk()
+  root.geometry("1200x600")
+
+  num = 0
+  imageList = []
+
+  for card in player1hand:
+    path = mapCardToImagePath(card)
+    imageList.append(ImageTk.PhotoImage(Image.open(path).resize((80, 120))))
+
+  for img in imageList:
+    btn = Button(root, image = img, command = partial(on_click, player1hand[num]))
+    btn.image = img
+    btn.grid(row = 0, column = num)
+
+    num += 1
+
+
+  # ********END EXPERIMENT******* #
 
   # determine who should lead first trick
   for card in player1hand:

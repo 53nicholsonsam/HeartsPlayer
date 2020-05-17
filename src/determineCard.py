@@ -1,3 +1,6 @@
+import tkinter as tk
+from PIL import Image, ImageTk
+
 def determineCard(playedCards, currentTrick, cardLed, hand):
     """
     Determines a card to play based on the card led and the player's hand.
@@ -258,4 +261,131 @@ def determineLeadValidity(playedCards, card, hand):
                 print("Hearts have not yet been broken. Please lead a non-Heart.")
                 return False
         return True
-                
+
+def mapCardToImagePath(card):
+    if card == "01c":
+        return 'src/imgs/2C.png'
+    if card == "02c":
+        return 'src/imgs/3C.png'
+    if card == "03c":
+        return 'src/imgs/4C.png'
+    if card == "04c":
+        return 'src/imgs/5C.png'
+    if card == "05c":
+        return 'src/imgs/6C.png'
+    if card == "06c":
+        return 'src/imgs/7C.png'
+    if card == "07c":
+        return 'src/imgs/8C.png'
+    if card == "08c":
+        return 'src/imgs/9C.png'
+    if card == "09c":
+        return 'src/imgs/10C.png'
+    if card == "10c":
+        return 'src/imgs/JC.png'
+    if card == "11c":
+        return 'src/imgs/QC.png'
+    if card == "12c":
+        return 'src/imgs/KC.png'
+    if card == "13c":
+        return 'src/imgs/AC.png'
+    
+    if card == "01d":
+        return 'src/imgs/2D.png'
+    if card == "02d":
+        return 'src/imgs/3D.png'
+    if card == "03d":
+        return 'src/imgs/4D.png'
+    if card == "04d":
+        return 'src/imgs/5D.png'
+    if card == "05d":
+        return 'src/imgs/6D.png'
+    if card == "06d":
+        return 'src/imgs/7D.png'
+    if card == "07d":
+        return 'src/imgs/8D.png'
+    if card == "08d":
+        return 'src/imgs/9D.png'
+    if card == "09d":
+        return 'src/imgs/10D.png'
+    if card == "10d":
+        return 'src/imgs/JD.png'
+    if card == "11d":
+        return 'src/imgs/QD.png'
+    if card == "12d":
+        return 'src/imgs/KD.png'
+    if card == "13d":
+        return 'src/imgs/AD.png'
+
+    if card == "01s":
+        return 'src/imgs/2S.png'
+    if card == "02s":
+        return 'src/imgs/3S.png'
+    if card == "03s":
+        return 'src/imgs/4S.png'
+    if card == "04s":
+        return 'src/imgs/5S.png'
+    if card == "05s":
+        return 'src/imgs/6S.png'
+    if card == "06s":
+        return 'src/imgs/7S.png'
+    if card == "07s":
+        return 'src/imgs/8S.png'
+    if card == "08s":
+        return 'src/imgs/9S.png'
+    if card == "09s":
+        return 'src/imgs/10S.png'
+    if card == "10s":
+        return 'src/imgs/JS.png'
+    if card == "11s":
+        return 'src/imgs/QS.png'
+    if card == "12s":
+        return 'src/imgs/KS.png'
+    if card == "13s":
+        return 'src/imgs/AS.png'
+
+    if card == "01h":
+        return 'src/imgs/2H.png'
+    if card == "02h":
+        return 'src/imgs/3H.png'
+    if card == "03h":
+        return 'src/imgs/4H.png'
+    if card == "04h":
+        return 'src/imgs/5H.png'
+    if card == "05h":
+        return 'src/imgs/6H.png'
+    if card == "06h":
+        return 'src/imgs/7H.png'
+    if card == "07h":
+        return 'src/imgs/8H.png'
+    if card == "08h":
+        return 'src/imgs/9H.png'
+    if card == "09h":
+        return 'src/imgs/10H.png'
+    if card == "10h":
+        return 'src/imgs/JH.png'
+    if card == "11h":
+        return 'src/imgs/QH.png'
+    if card == "12h":
+        return 'src/imgs/KH.png'
+    if card == "13h":
+        return 'src/imgs/AH.png'
+    else:
+        return 'INVALID CARD'
+    
+
+# root = tk.Tk()
+
+# canvas = tk.Canvas(root, width=800, height=800)
+# canvas.pack()
+
+# card1 = ImageTk.PhotoImage(Image.open('src/imgs/2C.png').resize((125, 200)))
+# card2 = ImageTk.PhotoImage(Image.open('src/imgs/QH.png').resize((125, 200)))
+# card3 = ImageTk.PhotoImage(Image.open('src/imgs/4S.png').resize((125, 200)))
+
+# image1 = canvas.create_image(10, 10, anchor=tk.NW, image=card1)
+# image2 = canvas.create_image(50, 10, anchor=tk.NW, image=card2)
+# image2 = canvas.create_image(90, 10, anchor=tk.NW, image=card3)
+
+
+# root.mainloop()
