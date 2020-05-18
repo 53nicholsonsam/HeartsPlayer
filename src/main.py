@@ -31,6 +31,9 @@ def start_game():
   player4points = 0
   handCount = 0
 
+  frame = Frame(root)
+  frame.grid()
+
   while player1points < 100 and player2points < 100 and player3points < 100 and player4points < 100:
     handCount += 1
     ### Dealing ###
@@ -128,11 +131,14 @@ def start_game():
       if card == "01c":
         lead = 4
 
+    items = []
+
     # while loop for current hand
     while len(playedCards) < 52:
       if lead == 1:
-        playMessage = Label(root, text = "You have the lead! Click on the card you'd like to play: ")
+        playMessage = Label(frame, text = "You have the lead! Click on the card you'd like to play: ")
         playMessage.grid(row = 1, columnspan = 5)
+        items.append(playMessage)
         root.update()
 
         while valid == False:
@@ -143,9 +149,10 @@ def start_game():
             imageList.append(ImageTk.PhotoImage(Image.open(path).resize((80, 120))))
 
           for img in imageList:
-            btn = Button(root, image = img, command = partial(on_click, "", playedCards, player1hand[num], player1hand))
+            btn = Button(frame, image = img, command = partial(on_click, "", playedCards, player1hand[num], player1hand))
             btn.image = img
             btn.grid(row = 2, column = num)
+            items.append(btn)
 
             num += 1
           root.update()
@@ -153,6 +160,7 @@ def start_game():
         currentTrick.append([tempCard, 1])
         playedCards.append(tempCard)
         player1hand.remove(tempCard)
+        leadCard = tempCard
         tempCard = ""
         valid = False
 
@@ -182,8 +190,9 @@ def start_game():
         playedCards.append(card4)
         player4hand.remove(card4)
 
-        trickMessage = Label(root, text = "Here are the cards that have been played so far this trick: ")
+        trickMessage = Label(frame, text = "Here are the cards that have been played so far this trick: ")
         trickMessage.grid(row = 1, columnspan = 5)
+        items.append(trickMessage)
 
         imageList = []
         for card in currentTrick:
@@ -192,13 +201,15 @@ def start_game():
 
         num = 0
         for img in imageList:
-          btn = Button(root, image = img)
+          btn = Button(frame, image = img)
           btn.image = img
           btn.grid(row = 2, column = num)
+          items.append(btn)
           num += 1
 
-        playMessage = Label(root, text = "Here is your hand. Click on the card you'd like to play: ")
+        playMessage = Label(frame, text = "Here is your hand. Click on the card you'd like to play: ")
         playMessage.grid(row = 3, columnspan = 5)
+        items.append(playMessage)
         root.update()
 
         while valid == False:
@@ -209,9 +220,10 @@ def start_game():
             imageList.append(ImageTk.PhotoImage(Image.open(path).resize((80, 120))))
 
           for img in imageList:
-            btn = Button(root, image = img, command = partial(on_click, leadCard, "", player1hand[num], player1hand))
+            btn = Button(frame, image = img, command = partial(on_click, leadCard, "", player1hand[num], player1hand))
             btn.image = img
             btn.grid(row = 4, column = num)
+            items.append(btn)
 
             num += 1
           root.update()
@@ -232,8 +244,9 @@ def start_game():
         playedCards.append(card4)
         player4hand.remove(card4)
 
-        trickMessage = Label(root, text = "Here are the cards that have been played so far this trick: ")
+        trickMessage = Label(frame, text = "Here are the cards that have been played so far this trick: ")
         trickMessage.grid(row = 1, columnspan = 5)
+        items.append(trickMessage)
 
         imageList = []
         for card in currentTrick:
@@ -242,13 +255,15 @@ def start_game():
 
         num = 0
         for img in imageList:
-          btn = Button(root, image = img)
+          btn = Button(frame, image = img)
           btn.image = img
           btn.grid(row = 2, column = num)
+          items.append(btn)
           num += 1
 
-        playMessage = Label(root, text = "Here is your hand. Click on the card you'd like to play: ")
+        playMessage = Label(frame, text = "Here is your hand. Click on the card you'd like to play: ")
         playMessage.grid(row = 3, columnspan = 5)
+        items.append(playMessage)
         root.update()
 
         while valid == False:
@@ -259,9 +274,10 @@ def start_game():
             imageList.append(ImageTk.PhotoImage(Image.open(path).resize((80, 120))))
 
           for img in imageList:
-            btn = Button(root, image = img, command = partial(on_click, leadCard, "", player1hand[num], player1hand))
+            btn = Button(frame, image = img, command = partial(on_click, leadCard, "", player1hand[num], player1hand))
             btn.image = img
             btn.grid(row = 4, column = num)
+            items.append(btn)
 
             num += 1
           root.update()
@@ -282,8 +298,10 @@ def start_game():
         playedCards.append(leadCard)
         player4hand.remove(leadCard)
 
-        trickMessage = Label(root, text = "Here are the cards that have been played so far this trick: ")
+        trickMessage = Label(frame, text = "Here are the cards that have been played so far this trick: ")
         trickMessage.grid(row = 1, columnspan = 5)
+        items.append(trickMessage)
+
         imageList = []
         for card in currentTrick:
           path = mapCardToImagePath(card[0])
@@ -291,13 +309,15 @@ def start_game():
 
         num = 0
         for img in imageList:
-          btn = Button(root, image = img)
+          btn = Button(frame, image = img)
           btn.image = img
           btn.grid(row = 2, column = num)
+          items.append(btn)
           num += 1
 
-        playMessage = Label(root, text = "Here is your hand. Click on the card you'd like to play: ")
+        playMessage = Label(frame, text = "Here is your hand. Click on the card you'd like to play: ")
         playMessage.grid(row = 3, columnspan = 5)
+        items.append(playMessage)
         root.update()
 
         while valid == False:
@@ -308,9 +328,10 @@ def start_game():
             imageList.append(ImageTk.PhotoImage(Image.open(path).resize((80, 120))))
 
           for img in imageList:
-            btn = Button(root, image = img, command = partial(on_click, leadCard, "", player1hand[num], player1hand))
+            btn = Button(frame, image = img, command = partial(on_click, leadCard, "", player1hand[num], player1hand))
             btn.image = img
             btn.grid(row = 4, column = num)
+            items.append(btn)
 
             num += 1
             root.update()
@@ -363,6 +384,10 @@ def start_game():
         print("Player 4 won the trick! " + str(points) + " points added. " )
 
       currentTrick = []
+      frame.destroy()
+      frame = Frame(root)
+      frame.grid()
+      root.update()
 
     for card in player1tricks:
       if card[2] == "h":
