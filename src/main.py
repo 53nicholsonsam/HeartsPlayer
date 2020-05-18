@@ -31,11 +31,26 @@ def start_game():
   player4points = 0
   handCount = 0
 
+  for child in root.winfo_children():
+    child.destroy()
+
   frame = Frame(root)
-  frame.grid()
+  frame.grid(row = 1)
+
+  globalFrame = Frame(root)
+  globalFrame.grid(row = 0)
 
   while player1points < 100 and player2points < 100 and player3points < 100 and player4points < 100:
-    handCount += 1
+    myPointsLabel = Label(globalFrame, text = "Your points: " + str(player1points))
+    myPointsLabel.grid(row = 0, columnspan = 5)
+    player2pointsLabel = Label(globalFrame, text = "Player 2 points: " + str(player2points))
+    player2pointsLabel.grid(row = 1, columnspan = 5)
+    player3pointsLabel = Label(globalFrame, text = "Player 3 points: " + str(player3points))
+    player3pointsLabel.grid(row = 2, columnspan = 5)
+    player4pointsLabel = Label(globalFrame, text = "Player 4 points: " + str(player4points))
+    player4pointsLabel.grid(row = 3, columnspan = 5)
+    root.update()
+
     ### Dealing ###
     SUITS = ["h","d","s","c"]
     # To make life a little easier, I am setting ace high to value of 13 and down from there, so a 2 is actually a 1 in this system
@@ -370,18 +385,26 @@ def start_game():
         for card in currentTrick:
           player1tricks.append(card[0])
         print("You won the trick! " + str(points) + " points added. " )
+        pointsUpdate = Label(globalFrame, text = "You won the trick! " + str(points) + " points added. " )
+        pointsUpdate.grid(row = 4, columnspan = 5)
       elif lead == 2:
         for card in currentTrick:
           player2tricks.append(card[0])
         print("Player 2 won the trick! " + str(points) + " points added. " )
+        pointsUpdate = Label(globalFrame, text = "Player 2 won the trick! " + str(points) + " points added. " )
+        pointsUpdate.grid(row = 4, columnspan = 5)
       elif lead == 3:
         for card in currentTrick:
           player3tricks.append(card[0])
         print("Player 3 won the trick! " + str(points) + " points added. " )
+        pointsUpdate = Label(globalFrame, text = "Player 3 won the trick! " + str(points) + " points added. " )
+        pointsUpdate.grid(row = 4, columnspan = 5)
       else:
         for card in currentTrick:
           player4tricks.append(card[0])
         print("Player 4 won the trick! " + str(points) + " points added. " )
+        pointsUpdate = Label(globalFrame, text = "Player 4 won the trick! " + str(points) + " points added. " )
+        pointsUpdate.grid(row = 4, columnspan = 5)
 
       currentTrick = []
       frame.destroy()
