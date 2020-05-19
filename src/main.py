@@ -29,7 +29,6 @@ def start_game():
   player2points = 0
   player3points = 0
   player4points = 0
-  handCount = 0
 
   for child in root.winfo_children():
     child.destroy()
@@ -40,15 +39,25 @@ def start_game():
   globalFrame = Frame(root)
   globalFrame.grid(row = 0)
 
+  handCount = 0
+
   while player1points < 100 and player2points < 100 and player3points < 100 and player4points < 100:
+    globalFrame.destroy()
+    globalFrame = Frame(root)
+    globalFrame.grid(row = 0)
+    totalPointsLabel = Label(globalFrame, text = "Total Accumulated Points: ")
+    totalPointsLabel.grid(row = 0, columnspan = 5)
     myPointsLabel = Label(globalFrame, text = "Your points: " + str(player1points))
-    myPointsLabel.grid(row = 0, columnspan = 5)
+    myPointsLabel.grid(row = 1, columnspan = 5)
     player2pointsLabel = Label(globalFrame, text = "Player 2 points: " + str(player2points))
-    player2pointsLabel.grid(row = 1, columnspan = 5)
+    player2pointsLabel.grid(row = 2, columnspan = 5)
     player3pointsLabel = Label(globalFrame, text = "Player 3 points: " + str(player3points))
-    player3pointsLabel.grid(row = 2, columnspan = 5)
+    player3pointsLabel.grid(row = 3, columnspan = 5)
     player4pointsLabel = Label(globalFrame, text = "Player 4 points: " + str(player4points))
-    player4pointsLabel.grid(row = 3, columnspan = 5)
+    player4pointsLabel.grid(row = 4, columnspan = 5)
+    handCount += 1
+    roundLabel = Label(globalFrame, text = "Beginning Round " + str(handCount) + "...")
+    roundLabel.grid(row = 5, columnspan = 5)
     root.update()
 
     ### Dealing ###
@@ -152,7 +161,7 @@ def start_game():
     while len(playedCards) < 52:
       if lead == 1:
         playMessage = Label(frame, text = "You have the lead! Click on the card you'd like to play: ")
-        playMessage.grid(row = 1, columnspan = 5)
+        playMessage.grid(row = 1, columnspan = 5, sticky='W')
         items.append(playMessage)
         root.update()
 
@@ -206,7 +215,7 @@ def start_game():
         player4hand.remove(card4)
 
         trickMessage = Label(frame, text = "Here are the cards that have been played so far this trick: ")
-        trickMessage.grid(row = 1, columnspan = 5)
+        trickMessage.grid(row = 1, columnspan = 5, sticky='W')
         items.append(trickMessage)
 
         imageList = []
@@ -223,7 +232,7 @@ def start_game():
           num += 1
 
         playMessage = Label(frame, text = "Here is your hand. Click on the card you'd like to play: ")
-        playMessage.grid(row = 3, columnspan = 5)
+        playMessage.grid(row = 3, columnspan = 5, sticky='W')
         items.append(playMessage)
         root.update()
 
@@ -260,7 +269,7 @@ def start_game():
         player4hand.remove(card4)
 
         trickMessage = Label(frame, text = "Here are the cards that have been played so far this trick: ")
-        trickMessage.grid(row = 1, columnspan = 5)
+        trickMessage.grid(row = 1, columnspan = 5, sticky='W')
         items.append(trickMessage)
 
         imageList = []
@@ -277,7 +286,7 @@ def start_game():
           num += 1
 
         playMessage = Label(frame, text = "Here is your hand. Click on the card you'd like to play: ")
-        playMessage.grid(row = 3, columnspan = 5)
+        playMessage.grid(row = 3, columnspan = 5, sticky='W')
         items.append(playMessage)
         root.update()
 
@@ -314,7 +323,7 @@ def start_game():
         player4hand.remove(leadCard)
 
         trickMessage = Label(frame, text = "Here are the cards that have been played so far this trick: ")
-        trickMessage.grid(row = 1, columnspan = 5)
+        trickMessage.grid(row = 1, columnspan = 5, sticky='W')
         items.append(trickMessage)
 
         imageList = []
@@ -331,7 +340,7 @@ def start_game():
           num += 1
 
         playMessage = Label(frame, text = "Here is your hand. Click on the card you'd like to play: ")
-        playMessage.grid(row = 3, columnspan = 5)
+        playMessage.grid(row = 3, columnspan = 5, sticky='W')
         items.append(playMessage)
         root.update()
 
@@ -381,30 +390,51 @@ def start_game():
         if c[2] == "h":
           points += 1
       
+      globalFrame.destroy()
+      globalFrame = Frame(root)
+      globalFrame.grid(row = 0)
+      root.update()
+
       if lead == 1:
         for card in currentTrick:
           player1tricks.append(card[0])
         print("You won the trick! " + str(points) + " points added. " )
-        pointsUpdate = Label(globalFrame, text = "You won the trick! " + str(points) + " points added. " )
-        pointsUpdate.grid(row = 4, columnspan = 5)
+        pointsUpdate = Label(globalFrame, text = "You won the previous trick! " + str(points) + " points added. " )
+        pointsUpdate.grid(row = 0, columnspan = 5)
       elif lead == 2:
         for card in currentTrick:
           player2tricks.append(card[0])
         print("Player 2 won the trick! " + str(points) + " points added. " )
-        pointsUpdate = Label(globalFrame, text = "Player 2 won the trick! " + str(points) + " points added. " )
-        pointsUpdate.grid(row = 4, columnspan = 5)
+        pointsUpdate = Label(globalFrame, text = "Player 2 won the previous trick! " + str(points) + " points added. " )
+        pointsUpdate.grid(row = 0, columnspan = 5)
       elif lead == 3:
         for card in currentTrick:
           player3tricks.append(card[0])
         print("Player 3 won the trick! " + str(points) + " points added. " )
-        pointsUpdate = Label(globalFrame, text = "Player 3 won the trick! " + str(points) + " points added. " )
-        pointsUpdate.grid(row = 4, columnspan = 5)
+        pointsUpdate = Label(globalFrame, text = "Player 3 won the previous trick! " + str(points) + " points added. " )
+        pointsUpdate.grid(row = 0, columnspan = 5)
       else:
         for card in currentTrick:
           player4tricks.append(card[0])
         print("Player 4 won the trick! " + str(points) + " points added. " )
-        pointsUpdate = Label(globalFrame, text = "Player 4 won the trick! " + str(points) + " points added. " )
-        pointsUpdate.grid(row = 4, columnspan = 5)
+        pointsUpdate = Label(globalFrame, text = "Player 4 won the previous trick! " + str(points) + " points added. " )
+        pointsUpdate.grid(row = 0, columnspan = 5)
+
+      broken = False
+      for card in playedCards:
+        if card[2] == "h":
+          broken = True
+          break
+
+      if broken:
+        brokenLabel = Label(globalFrame, text = "Hearts have been broken!")
+        brokenLabel.grid(row = 1, columnspan = 5)
+      else:
+        brokenLabel = Label(globalFrame, text = "Hearts have NOT been broken!" )
+        brokenLabel.grid(row = 1, columnspan = 5)
+
+      handLabel = Label(globalFrame, text = "Round " + str(handCount) + ", Trick " + str(int((len(playedCards) / 4)) + 1) + ":")
+      handLabel.grid(row = 2, columnspan = 5)
 
       currentTrick = []
       frame.destroy()
@@ -433,11 +463,47 @@ def start_game():
       if card == "11s":
         player4points += 13
 
-    print("HAND: " + str(handCount))
     print(player1points)
     print(player2points)
     print(player3points)
     print(player4points)
+  
+  globalFrame.destroy()
+  frame.destroy()
+  frame = Frame(root)
+  frame.grid()
+
+  lowest = player1points
+  player = 1
+  if player2points < lowest:
+    lowest = player2points
+    player = 2
+  if player3points < lowest:
+    lowest = player3points
+    player = 3
+  if player4points < lowest:
+    lowest = player4points
+    player = 4
+  
+  if player == 1:
+    winnerLabel = Label(root, text = "You won!")
+    winnerLabel.grid(row = 0, columnspan = 3)
+  else:
+    winnerLabel = Label(root, text = "Player " + str(player) + " won!")
+    winnerLabel.grid(row = 0, columnspan = 3)
+
+  finalPointsLabel = Label(root, text = "Final Points: ")
+  finalPointsLabel.grid(row = 1, columnspan = 5)
+  myPointsLabel = Label(root, text = "Your points: " + str(player1points))
+  myPointsLabel.grid(row = 2, columnspan = 5)
+  player2pointsLabel = Label(root, text = "Player 2 points: " + str(player2points))
+  player2pointsLabel.grid(row = 3, columnspan = 5)
+  player3pointsLabel = Label(root, text = "Player 3 points: " + str(player3points))
+  player3pointsLabel.grid(row = 4, columnspan = 5)
+  player4pointsLabel = Label(root, text = "Player 4 points: " + str(player4points))
+  player4pointsLabel.grid(row = 5, columnspan = 5)
+
+  root.update()
 
 root = tk.Tk()
 root.geometry("1200x600")

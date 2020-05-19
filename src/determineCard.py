@@ -246,6 +246,10 @@ def determineValidity(cardLed, card, hand):
         return True
     
 def determineLeadValidity(playedCards, card, hand):
+    """
+    Given the cards that have been played so far, as well as the player's hand,
+    determine whether the card they have attempted to lead is valid.
+    """
     # must lead 2C if have it for first trick
     if "01c" in hand and card != "01c":
         print("You must lead the 2 of clubs for the first trick.")
@@ -273,6 +277,9 @@ def determineLeadValidity(playedCards, card, hand):
         return True
 
 def mapCardToImagePath(card):
+    """
+    Given a card, return the relative path to its image
+    """
     if card == "01c":
         return 'src/imgs/2C.png'
     if card == "02c":
@@ -382,59 +389,3 @@ def mapCardToImagePath(card):
         return 'src/imgs/AH.png'
     else:
         return 'INVALID CARD'
-    
-
-# root = tk.Tk()
-
-# canvas = tk.Canvas(root, width=800, height=800)
-# canvas.pack()
-
-# card1 = ImageTk.PhotoImage(Image.open('src/imgs/2C.png').resize((125, 200)))
-# card2 = ImageTk.PhotoImage(Image.open('src/imgs/QH.png').resize((125, 200)))
-# card3 = ImageTk.PhotoImage(Image.open('src/imgs/4S.png').resize((125, 200)))
-
-# image1 = canvas.create_image(10, 10, anchor=tk.NW, image=card1)
-# image2 = canvas.create_image(50, 10, anchor=tk.NW, image=card2)
-# image2 = canvas.create_image(90, 10, anchor=tk.NW, image=card3)
-
-
-# root.mainloop()
-
-#   trickMessage = Label(root, text = "Here are the cards that have been played so far this trick: ")
-#       trickMessage.grid(row = 1, columnspan=5, sticky='W')
-
-#       imageList = []
-#       for card in currentTrick:
-#         path = mapCardToImagePath(card[0])
-#         imageList.append(ImageTk.PhotoImage(Image.open(path).resize((80, 120))))
-
-#       num = 0
-#       for img in imageList:
-#         btn = Button(root, image = img)
-#         btn.image = img
-#         btn.grid(row = 2, column = num)
-#         num += 1
-
-#       playMessage = Label(root, text = "Here is your hand. Click the card you would like to play: ")
-#       playMessage.grid(row = 3, columnspan=5, sticky='W')
-
-#       while valid == False:
-#         num = 0
-#         imageList = []
-#         for card in player1hand:
-#           path = mapCardToImagePath(card)
-#           imageList.append(ImageTk.PhotoImage(Image.open(path).resize((80, 120))))
-
-#         for img in imageList:
-#           btn = Button(root, image = img, command = partial(on_click, "01c", player1hand[num], player1hand))
-#           btn.image = img
-#           btn.grid(row = 4, column = num)
-
-#           num += 1
-#         root.mainloop()
-
-#       player1hand.remove(tempCard)
-#       playedCards.append(tempCard)
-#       currentTrick.append([tempCard, 1])
-#       tempCard = ""
-#       valid = False
