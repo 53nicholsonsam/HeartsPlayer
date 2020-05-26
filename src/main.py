@@ -398,27 +398,42 @@ def start_game():
       if lead == 1:
         for card in currentTrick:
           player1tricks.append(card[0])
-        print("You won the trick! " + str(points) + " points added. " )
-        pointsUpdate = Label(globalFrame, text = "You won the previous trick! " + str(points) + " points added. " )
+        print("You won the trick! " + str(points) + " points added. Here were the cards played:" )
+        pointsUpdate = Label(globalFrame, text = "You won the previous trick! " + str(points) + " points added. Here were the cards played:" )
         pointsUpdate.grid(row = 0, columnspan = 5)
       elif lead == 2:
         for card in currentTrick:
           player2tricks.append(card[0])
-        print("Player 2 won the trick! " + str(points) + " points added. " )
-        pointsUpdate = Label(globalFrame, text = "Player 2 won the previous trick! " + str(points) + " points added. " )
+        print("Player 2 won the trick! " + str(points) + " points added. Here were the cards played:" )
+        pointsUpdate = Label(globalFrame, text = "Player 2 won the previous trick! " + str(points) + " points added. Here were the cards played:" )
         pointsUpdate.grid(row = 0, columnspan = 5)
       elif lead == 3:
         for card in currentTrick:
           player3tricks.append(card[0])
-        print("Player 3 won the trick! " + str(points) + " points added. " )
-        pointsUpdate = Label(globalFrame, text = "Player 3 won the previous trick! " + str(points) + " points added. " )
+        print("Player 3 won the trick! " + str(points) + " points added. Here were the cards played:" )
+        pointsUpdate = Label(globalFrame, text = "Player 3 won the previous trick! " + str(points) + " points added. Here were the cards played:" )
         pointsUpdate.grid(row = 0, columnspan = 5)
       else:
         for card in currentTrick:
           player4tricks.append(card[0])
-        print("Player 4 won the trick! " + str(points) + " points added. " )
-        pointsUpdate = Label(globalFrame, text = "Player 4 won the previous trick! " + str(points) + " points added. " )
+        print("Player 4 won the trick! " + str(points) + " points added. Here were the cards played:" )
+        pointsUpdate = Label(globalFrame, text = "Player 4 won the previous trick! " + str(points) + " points added. Here were the cards played:" )
         pointsUpdate.grid(row = 0, columnspan = 5)
+
+      print(currentTrick)
+      num = 0
+      imageList = []
+      for card in currentTrick:
+        path = mapCardToImagePath(card[0])
+        imageList.append(ImageTk.PhotoImage(Image.open(path).resize((80, 120))))
+
+      for img in imageList:
+        btn = Button(globalFrame, image = img)
+        btn.image = img
+        btn.grid(row = 1, column = num)
+        items.append(btn)
+
+        num += 1
 
       broken = False
       for card in playedCards:
@@ -428,13 +443,13 @@ def start_game():
 
       if broken:
         brokenLabel = Label(globalFrame, text = "Hearts have been broken!")
-        brokenLabel.grid(row = 1, columnspan = 5)
+        brokenLabel.grid(row = 2, columnspan = 5)
       else:
         brokenLabel = Label(globalFrame, text = "Hearts have NOT been broken!" )
-        brokenLabel.grid(row = 1, columnspan = 5)
+        brokenLabel.grid(row = 2, columnspan = 5)
 
       handLabel = Label(globalFrame, text = "Round " + str(handCount) + ", Trick " + str(int((len(playedCards) / 4)) + 1) + ":")
-      handLabel.grid(row = 2, columnspan = 5)
+      handLabel.grid(row = 3, columnspan = 5)
 
       currentTrick = []
       frame.destroy()
