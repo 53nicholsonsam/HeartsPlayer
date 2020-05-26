@@ -418,29 +418,24 @@ def start_game():
       if lead == 1:
         for card in currentTrick:
           player1tricks.append(card[0])
-        print("You won the trick! " + str(points) + " points added. Here were the cards played:" )
         pointsUpdate = Label(globalFrame, text = "You won the previous trick! " + str(points) + " points added. Here were the cards played:" )
         pointsUpdate.grid(row = 0, columnspan = 5)
       elif lead == 2:
         for card in currentTrick:
           player2tricks.append(card[0])
-        print("Player 2 won the trick! " + str(points) + " points added. Here were the cards played:" )
         pointsUpdate = Label(globalFrame, text = "Player 2 won the previous trick! " + str(points) + " points added. Here were the cards played:" )
         pointsUpdate.grid(row = 0, columnspan = 5)
       elif lead == 3:
         for card in currentTrick:
           player3tricks.append(card[0])
-        print("Player 3 won the trick! " + str(points) + " points added. Here were the cards played:" )
         pointsUpdate = Label(globalFrame, text = "Player 3 won the previous trick! " + str(points) + " points added. Here were the cards played:" )
         pointsUpdate.grid(row = 0, columnspan = 5)
       else:
         for card in currentTrick:
           player4tricks.append(card[0])
-        print("Player 4 won the trick! " + str(points) + " points added. Here were the cards played:" )
         pointsUpdate = Label(globalFrame, text = "Player 4 won the previous trick! " + str(points) + " points added. Here were the cards played:" )
         pointsUpdate.grid(row = 0, columnspan = 5)
 
-      print(currentTrick)
       num = 0
       imageList = []
       for card in currentTrick:
@@ -497,11 +492,6 @@ def start_game():
         player4points += 1
       if card == "11s":
         player4points += 13
-
-    print(player1points)
-    print(player2points)
-    print(player3points)
-    print(player4points)
   
   globalFrame.destroy()
   frame.destroy()

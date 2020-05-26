@@ -228,17 +228,14 @@ def determineValidity(cardLed, card, hand):
         if card == c:
             inHand = True
     if inHand == False:
-        print("Card selected must be in hand. Please try again.")
         return [False, "Card selected must be in hand. Please try again."]
     if cardLed == "01c" and (card[2] == "h" or card == "11s"):
-        print("Cannot play Queen of spades or a heart on the first trick.")
         return [False, "Cannot play Queen of spades or a heart on the first trick."]
     if card[2] == cardLed[2]:
         return [True, ""]
     else: 
         for c in hand:
             if c[2] == cardLed[2]:
-                print("If you have a card of the suit led, you must play it.")
                 return [False, "If you have a card of the suit led, you must play it."]
         return [True, ""]
     
@@ -249,7 +246,6 @@ def determineLeadValidity(playedCards, card, hand):
     """
     # must lead 2C if have it for first trick
     if "01c" in hand and card != "01c":
-        print("You must lead the 2 of clubs for the first trick.")
         return [False, "You must lead the 2 of clubs for the first trick."]
     # ensure card is actually in hand
     inHand = False
@@ -257,7 +253,6 @@ def determineLeadValidity(playedCards, card, hand):
         if card == c:
             inHand = True
     if inHand == False:
-        print("Card selected must be in hand. Please try again.")
         return [False, "Card selected must be in hand. Please try again."]
     # always okay to lead a non-Heart
     if card[2] != "h":
@@ -269,7 +264,6 @@ def determineLeadValidity(playedCards, card, hand):
                 return [True, ""]
         for c in hand:
             if c[2] != "h":
-                print("Hearts have not yet been broken. Please lead a non-Heart.")
                 return [False, "Hearts have not yet been broken. Please lead a non-Heart."]
         return [True, ""]
 
