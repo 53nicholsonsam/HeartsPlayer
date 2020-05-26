@@ -8,22 +8,38 @@ from functools import partial
 
 valid = False
 tempCard = ""
+errorMessage = ""
 
-def on_click(cardLed, playedCards, card, hand):
+def on_click(frame, cardLed, playedCards, card, hand):
   global valid
   global tempCard
+  global errorMessage
+  # clear previous error message if there was one
+  if errorMessage != "":
+    errorLabel = Label(frame, text = "                                                                                                     ")
+    errorLabel.grid(row = 5, columnspan = 8, sticky='W')
+    root.update()
   # when player has the lead
   if cardLed == "":
-    valid = determineLeadValidity(playedCards, card, hand)
+    determine = determineLeadValidity(playedCards, card, hand)
+    valid = determine[0]
+    errorMessage = determine[1]
     tempCard = card
   # for non-leads
   else:
-    valid = determineValidity(cardLed, card, hand)
+    determine = determineValidity(cardLed, card, hand)
+    valid = determine[0]
+    errorMessage = determine[1]
     tempCard = card
+
+  errorLabel = Label(frame, text = errorMessage)
+  errorLabel.grid(row = 5, columnspan = 8, sticky='W')
+  root.update()
 
 def start_game():
   global valid
   global tempCard
+  global errorMessage
   # user is player 1
   player1points = 0
   player2points = 0
@@ -173,12 +189,13 @@ def start_game():
             imageList.append(ImageTk.PhotoImage(Image.open(path).resize((80, 120))))
 
           for img in imageList:
-            btn = Button(frame, image = img, command = partial(on_click, "", playedCards, player1hand[num], player1hand))
+            btn = Button(frame, image = img, command = partial(on_click, frame, "", playedCards, player1hand[num], player1hand))
             btn.image = img
             btn.grid(row = 2, column = num)
             items.append(btn)
 
             num += 1
+
           root.update()
 
         currentTrick.append([tempCard, 1])
@@ -244,12 +261,13 @@ def start_game():
             imageList.append(ImageTk.PhotoImage(Image.open(path).resize((80, 120))))
 
           for img in imageList:
-            btn = Button(frame, image = img, command = partial(on_click, leadCard, "", player1hand[num], player1hand))
+            btn = Button(frame, image = img, command = partial(on_click, frame, leadCard, "", player1hand[num], player1hand))
             btn.image = img
             btn.grid(row = 4, column = num)
             items.append(btn)
 
             num += 1
+
           root.update()
 
         currentTrick.append([tempCard, 1])
@@ -298,12 +316,13 @@ def start_game():
             imageList.append(ImageTk.PhotoImage(Image.open(path).resize((80, 120))))
 
           for img in imageList:
-            btn = Button(frame, image = img, command = partial(on_click, leadCard, "", player1hand[num], player1hand))
+            btn = Button(frame, image = img, command = partial(on_click, frame, leadCard, "", player1hand[num], player1hand))
             btn.image = img
             btn.grid(row = 4, column = num)
             items.append(btn)
 
             num += 1
+
           root.update()
 
         currentTrick.append([tempCard, 1])
@@ -352,13 +371,14 @@ def start_game():
             imageList.append(ImageTk.PhotoImage(Image.open(path).resize((80, 120))))
 
           for img in imageList:
-            btn = Button(frame, image = img, command = partial(on_click, leadCard, "", player1hand[num], player1hand))
+            btn = Button(frame, image = img, command = partial(on_click, frame, leadCard, "", player1hand[num], player1hand))
             btn.image = img
             btn.grid(row = 4, column = num)
             items.append(btn)
 
             num += 1
-            root.update()
+
+          root.update()
 
         currentTrick.append([tempCard, 1])
         playedCards.append(tempCard)

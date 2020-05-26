@@ -222,9 +222,6 @@ def determineValidity(cardLed, card, hand):
     """
     Determine if the card the player tried to play is valid.
     """
-    # must lead the two of clubs if you have it
-    if "01c" in hand and card != "01c":
-        return False
     # ensure card is actually in hand
     inHand = False
     for c in hand:
@@ -232,18 +229,18 @@ def determineValidity(cardLed, card, hand):
             inHand = True
     if inHand == False:
         print("Card selected must be in hand. Please try again.")
-        return False
+        return [False, "Card selected must be in hand. Please try again."]
     if cardLed == "01c" and (card[2] == "h" or card == "11s"):
         print("Cannot play Queen of spades or a heart on the first trick.")
-        return False
+        return [False, "Cannot play Queen of spades or a heart on the first trick."]
     if card[2] == cardLed[2]:
-        return True
+        return [True, ""]
     else: 
         for c in hand:
             if c[2] == cardLed[2]:
                 print("If you have a card of the suit led, you must play it.")
-                return False
-        return True
+                return [False, "If you have a card of the suit led, you must play it."]
+        return [True, ""]
     
 def determineLeadValidity(playedCards, card, hand):
     """
@@ -253,7 +250,7 @@ def determineLeadValidity(playedCards, card, hand):
     # must lead 2C if have it for first trick
     if "01c" in hand and card != "01c":
         print("You must lead the 2 of clubs for the first trick.")
-        return False
+        return [False, "You must lead the 2 of clubs for the first trick."]
     # ensure card is actually in hand
     inHand = False
     for c in hand:
@@ -261,20 +258,20 @@ def determineLeadValidity(playedCards, card, hand):
             inHand = True
     if inHand == False:
         print("Card selected must be in hand. Please try again.")
-        return False
+        return [False, "Card selected must be in hand. Please try again."]
     # always okay to lead a non-Heart
     if card[2] != "h":
-        return True
+        return [True, ""]
     # otherwise, it must have either been broken, or the player has all hearts left
     else:
         for c in playedCards:
             if c[2] == "h":
-                return True
+                return [True, ""]
         for c in hand:
             if c[2] != "h":
                 print("Hearts have not yet been broken. Please lead a non-Heart.")
-                return False
-        return True
+                return [False, "Hearts have not yet been broken. Please lead a non-Heart."]
+        return [True, ""]
 
 def mapCardToImagePath(card):
     """
