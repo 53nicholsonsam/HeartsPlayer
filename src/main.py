@@ -217,7 +217,7 @@ def start_game():
         currentTrick.append([card4, 4])
         playedCards.append(card4)
         player4hand.remove(card4)
-      elif lead == 2:
+      if lead == 2:
         leadCard = determineLead(playedCards, player2hand)
         currentTrick.append([leadCard, 2])
         playedCards.append(leadCard)
@@ -276,7 +276,7 @@ def start_game():
         tempCard = ""
         valid = False
 
-      elif lead == 3:
+      if lead == 3:
         leadCard = determineLead(playedCards, player3hand)
         currentTrick.append([leadCard, 3])
         playedCards.append(leadCard)
@@ -335,7 +335,7 @@ def start_game():
         currentTrick.append([card2, 2])
         playedCards.append(card2)
         player2hand.remove(card2)
-      else:
+      if lead == 4:
         leadCard = determineLead(playedCards, player4hand)
         currentTrick.append([leadCard, 4])
         playedCards.append(leadCard)

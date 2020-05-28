@@ -180,6 +180,9 @@ def determineLead(playedCards, hand):
             return str(highestS) + "s"
         else:
             return "0" + str(highestS) + "s"
+    # next, try to lead a low spade, if you have plenty of them
+    if numberS > 3 and lowestS < 10:
+        return "0" + str(lowestS) + "s"
     # next, try to lead either clubs or diamonds, depending on which you have less of
     elif numberC > 0 and (numberC < numberD or numberD == 0):
         # only lead highest one if exactly one full trick of them have been played
